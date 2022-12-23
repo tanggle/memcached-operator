@@ -29,8 +29,11 @@ type MemcachedSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of Memcached. Edit memcached_types.go to remove/update
-	// Foo string `json:"foo,omitempty"`
-	Size int32 `json:"size"`
+	Foo string `json:"foo,omitempty"`
+
+	// +kubebuilder:validation:Minimum=0
+	// Size is the size of the memcached deployment
+	// Size int32 `json:"size"`
 }
 
 // MemcachedStatus defines the observed state of Memcached
@@ -38,7 +41,8 @@ type MemcachedStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	Nodes []string `json:"nodes"`
+	// Nodes are the names of the memcached pods
+	// Nodes []string `json:"nodes"`
 }
 
 //+kubebuilder:object:root=true
@@ -46,14 +50,11 @@ type MemcachedStatus struct {
 
 // Memcached is the Schema for the memcacheds API
 type Memcached struct {
-	metav1.TypeMeta `json:",inline"`
-	// metav1.ObjectMeta `json:"metadata,omitempty"`
-	metav1.ObjectMeta `json:"metadata,size"`
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// Spec   MemcachedSpec   `json:"spec,omitempty"`
-	Spec MemcachedSpec `json:"spec,size"`
-	// Status MemcachedStatus `json:"status,omitempty"`
-	Status MemcachedStatus `json:"status,size"`
+	Spec   MemcachedSpec   `json:"spec,omitempty"`
+	Status MemcachedStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
@@ -61,8 +62,7 @@ type Memcached struct {
 // MemcachedList contains a list of Memcached
 type MemcachedList struct {
 	metav1.TypeMeta `json:",inline"`
-	// metav1.ListMeta `json:"metadata,omitempty"`
-	metav1.ListMeta `json:"metadata,size"`
+	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Memcached `json:"items"`
 }
 

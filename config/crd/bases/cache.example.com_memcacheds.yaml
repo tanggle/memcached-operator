@@ -33,30 +33,16 @@ spec:
           metadata:
             type: object
           spec:
-            description: Spec   MemcachedSpec   `json:"spec,omitempty"`
+            description: MemcachedSpec defines the desired state of Memcached
             properties:
-              size:
+              foo:
                 description: Foo is an example field of Memcached. Edit memcached_types.go
-                  to remove/update Foo string `json:"foo,omitempty"`
-                format: int32
-                type: integer
-            required:
-            - size
+                  to remove/update
+                type: string
             type: object
           status:
-            description: Status MemcachedStatus `json:"status,omitempty"`
-            properties:
-              nodes:
-                items:
-                  type: string
-                type: array
-            required:
-            - nodes
+            description: MemcachedStatus defines the observed state of Memcached
             type: object
-        required:
-        - metadata
-        - spec
-        - status
         type: object
     served: true
     storage: true
